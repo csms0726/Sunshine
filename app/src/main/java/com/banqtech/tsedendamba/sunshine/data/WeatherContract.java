@@ -16,7 +16,6 @@
 package com.banqtech.tsedendamba.sunshine.data;
 
 import android.provider.BaseColumns;
-
 /**
  * Defines table and column names for the weather database.
  */
@@ -52,5 +51,13 @@ public class WeatherContract {
 
         // Degrees are meteorological degrees (e.g, 0 is north, 180 is south).  Stored as floats.
         public static final String COLUMN_DEGREES = "degrees";
+    }
+    public static final class Locationentry implements BaseColumns{
+        public static final String TABLE_NAME = "location";
+        public static final String COLUMN_LOC_ID = "location_id";
+        public static final String COLUMN_LOC_SETTING = "location_setting";
+        public static final String COLUMN_CITYNAME = "cityname";
+        public static final String COLUMN_COORD_LAT = "coord_lat";
+        public static final String COLUMN_COORD_LONG = "coord_long";
     }
 }
