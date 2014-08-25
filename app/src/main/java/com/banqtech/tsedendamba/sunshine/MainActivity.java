@@ -15,6 +15,7 @@ public class MainActivity extends ActionBarActivity {
 
     private static final String LOG_TAG = "com.banqtech.tsedendamba.sunshine";
 
+    //onCreate bundle Main
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
