@@ -42,7 +42,14 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
         // location setting, the city name, and the latitude and longitude
 
         // TBD
-
+        final String SQL_CREATE_LOCATION_TABLE = "CREATE TABLE " + LocationEntry.TABLE_NAME + " (" +
+                LocationEntry._ID + " INTEGER PRIMARY KEY," +
+                LocationEntry.COLUMN_LOCATION_SETTING + " TEXT UNIQUE NOT NULL," +
+                LocationEntry.COLUMN_CITY_NAME + " TEXT NOT NULL," +
+                LocationEntry.COLUMN_COORD_LAT + " REAL NOT NULL," +
+                LocationEntry.COLUMN_COORD_LONG + " REAL NOT NULL," +
+                "UNIQUE (" + LocationEntry.COLUMN_LOCATION_SETTING+") ON CONFLICT IGNORE"+
+                " );";
         final String SQL_CREATE_WEATHER_TABLE = "CREATE TABLE " + WeatherEntry.TABLE_NAME + " (" +
                 // Why AutoIncrement here, and not above?
                 // Unique keys will be auto-generated in either case.  But for weather
@@ -73,10 +80,14 @@ public class WeatherDbHelper extends SQLiteOpenHelper {
                 // per location, it's created a UNIQUE constraint with REPLACE strategy
                 " UNIQUE (" + WeatherEntry.COLUMN_DATETEXT + ", " +
                 WeatherEntry.COLUMN_LOC_KEY + ") ON CONFLICT REPLACE);";
+        sqLiteDatabase.execSQL(SQL_CREATE_LOCATION_TABLE);
+        sqLiteDatabase.execSQL(SQL_CREATE_WEATHER_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int oldVersion, int newVersion) {
-
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + LocationEntry.TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + WeatherEntry.TABLE_NAME);
+        onCreate(sqLiteDatabase);
     }
 }
