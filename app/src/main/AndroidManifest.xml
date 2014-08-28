@@ -37,6 +37,9 @@
                 android:value="MainActivity"
                 />
         </activity>
+        <provider
+            android:authorities="com.banqtech.tsedendamba.sunshine"
+            android:name=".data.WeatherProvider" />
     </application>
 
 </manifest>
