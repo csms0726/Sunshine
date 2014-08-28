@@ -10,7 +10,7 @@ import android.net.Uri;
  * Created by Tsedendamba on 8/28/2014.
  */
 public class WeatherProvider extends ContentProvider {
-
+    //Start WeatherProvider
     private static final int WEATHER = 100;
     private static final int WEATHER_WITH_LOCATION = 101;
     private static final int WEATHER_WITH_LOCATION_AND_DATE = 102;
