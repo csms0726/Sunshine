@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+//This is detail activity
 public class DetailActivity extends ActionBarActivity {
 
     @Override
