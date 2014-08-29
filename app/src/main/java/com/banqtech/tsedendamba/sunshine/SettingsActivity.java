@@ -6,6 +6,8 @@ import android.preference.Preference;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceManager;
 
+import com.banqtech.tsedendamba.sunshine.data.WeatherContract;
+
 /**
  * A {@link PreferenceActivity} that presents a set of application settings.
  * <p>
@@ -17,6 +19,9 @@ import android.preference.PreferenceManager;
 
 public class SettingsActivity extends PreferenceActivity
         implements Preference.OnPreferenceChangeListener {
+    // since we use the preference change initially to populate the summary
+    // field, we'll ignore that change at start of the activity
+    boolean mBindingPreference;
 
     @SuppressWarnings("deprecation")
     @Override
@@ -39,6 +44,7 @@ public class SettingsActivity extends PreferenceActivity
      * is changed.)
      */
     private void bindPreferenceSummaryToValue(Preference preference) {
+        mBindingPreference = true;
         // Set the listener to watch for value changes.
         preference.setOnPreferenceChangeListener(this);
 
@@ -48,11 +54,24 @@ public class SettingsActivity extends PreferenceActivity
                 PreferenceManager
                         .getDefaultSharedPreferences(preference.getContext())
                         .getString(preference.getKey(), ""));
+        mBindingPreference = false;
     }
 
     @Override
     public boolean onPreferenceChange(Preference preference, Object value) {
         String stringValue = value.toString();
+
+        // are we starting the preference activity?
+        if ( !mBindingPreference ) {
+            if (preference.getKey().equals(getString(R.string.pref_location_key))) {
+                FetchWeatherTask weatherTask = new FetchWeatherTask(this);
+                String location = value.toString();
+                weatherTask.execute(location);
+            } else {
+                // notify code that weather may be impacted
+                getContentResolver().notifyChange(WeatherContract.WeatherEntry.CONTENT_URI, null);
+            }
+        }
 
         if (preference instanceof ListPreference) {
             // For list preferences, look up the correct display value in
