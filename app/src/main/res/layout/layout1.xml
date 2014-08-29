@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/tempDay"
-        android:id="@+id/textView2"
+        android:id="@+id/list_item_date_textview"
         android:layout_marginTop="28dp"
         android:layout_marginLeft="39dp"
         android:layout_below="@+id/list_item_forecast_textview"
@@ -31,10 +31,10 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/tempNight"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/textView2"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2"
+        android:id="@+id/list_item_high_textview"
+        android:layout_below="@+id/list_item_date_textview"
+        android:layout_alignLeft="@+id/list_item_date_textview"
+        android:layout_alignStart="@+id/list_item_date_textview"
         android:textStyle="bold" />
 
 </RelativeLayout>
