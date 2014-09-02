@@ -19,10 +19,6 @@ import java.util.Date;
  * Created by Tsedendamba on 8/28/2014.
  */
 public class Utility {
-    // Format used for storing dates in the database.  ALso used for converting those strings
-    // back into date objects for comparison/processing.
-    public static final String DATE_FORMAT = "yyyyMMdd";
-
     public static String getPreferredLocation(Context context) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         return prefs.getString(context.getString(R.string.pref_location_key),
@@ -36,20 +32,25 @@ public class Utility {
                 .equals(context.getString(R.string.pref_units_metric));
     }
 
-    static String formatTemperature(Context context,double temperature, boolean isMetric) {
+    static String formatTemperature(Context context, double temperature, boolean isMetric) {
         double temp;
         if ( !isMetric ) {
             temp = 9*temperature/5+32;
         } else {
             temp = temperature;
         }
-        return context.getString(R.string.format_temperature,temp);
+        return context.getString(R.string.format_temperature, temp);
     }
 
     static String formatDate(String dateString) {
         Date date = WeatherContract.getDateFromDb(dateString);
         return DateFormat.getDateInstance().format(date);
     }
+
+    // Format used for storing dates in the database.  ALso used for converting those strings
+    // back into date objects for comparison/processing.
+    public static final String DATE_FORMAT = "yyyyMMdd";
+
     /**
      * Helper method to convert the database representation of the date into something to display
      * to users.  As classy and polished a user experience as "20140102" is, we can do better.
@@ -74,10 +75,11 @@ public class Utility {
         // is "Today, June 24"
         if (todayStr.equals(dateStr)) {
             String today = context.getString(R.string.today);
-            return context.getString(
-                    R.string.format_full_friendly_date,
+            int formatId = R.string.format_full_friendly_date;
+            return String.format(context.getString(
+                    formatId,
                     today,
-                    getFormattedMonthDay(context, dateStr));
+                    getFormattedMonthDay(context, dateStr)));
         } else {
             Calendar cal = Calendar.getInstance();
             cal.setTime(todayDate);
@@ -257,10 +259,4 @@ public class Utility {
         }
         return -1;
     }
-
-    /**
-     * Returns true if metric unit should be used, or false if
-     * imperial units should be used.
-     */
-
 }
