@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.banqtech.tsedendamba.sunshine" >
 
+    <!-- This permission is necessary in order for Sunshine to perform network access. -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -10,36 +11,33 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:name="com.banqtech.tsedendamba.sunshine.MainActivity"
+            android:theme="@style/ForecastTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <data android:scheme="geo"/>
-
-            </intent-filter>
         </activity>
         <activity
-            android:name=".DetailActivity"
-            android:label="@string/title_activity_detail" >
-        </activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity"
-            >
+            android:label="@string/title_activity_detail"
+            android:name="com.banqtech.tsedendamba.sunshine.DetailActivity"
+            android:parentActivityName="com.banqtech.tsedendamba.sunshine.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="MainActivity"
-                />
+                android:value="com.example.android.sunshine.app.MainActivity" />
+        </activity>
+        <activity
+            android:label="@string/title_activity_settings"
+            android:name="com.banqtech.tsedendamba.sunshine.SettingsActivity"
+            android:parentActivityName="com.banqtech.tsedendamba.sunshine.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.sunshine.app.MainActivity" />
         </activity>
         <provider
             android:authorities="com.banqtech.tsedendamba.sunshine"
-            android:name=".data.WeatherProvider" />
+            android:name="com.banqtech.tsedendamba.sunshine.data.WeatherProvider" />
     </application>
 
 </manifest>
