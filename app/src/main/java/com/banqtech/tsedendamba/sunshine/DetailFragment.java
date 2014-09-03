@@ -28,6 +28,8 @@ import com.banqtech.tsedendamba.sunshine.data.WeatherContract.WeatherEntry;
  */
 public class DetailFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    //Branch test
+
     private static final String LOG_TAG = DetailFragment.class.getSimpleName();
 
     private static final String FORECAST_SHARE_HASHTAG = " #SunshineApp";
